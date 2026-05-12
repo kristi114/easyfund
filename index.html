@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EasyFund for Dealers and Brokers | YachtWay</title>
+<meta name="description" content="Embed the EasyFund calculator on your website. Pre-qualified buyer leads delivered to your inbox." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --brand-800: #260754;
+    --brand-700: #4B0EA3;
+    --grad-a: #8729FA;
+    --grad-b: #2B0075;
+    --gray-10: #F9FAFB;
+    --gray-25: #F6F6F7;
+    --gray-50: #F1F1F2;
+    --gray-100: #DCDCDE;
+    --gray-200: #C1C1C4;
+    --gray-300: #A6A6AB;
+    --gray-700: #3A3A3F;
+
+    --display: 'Poppins', sans-serif;
+    --body: 'Figtree', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    font-weight: 400;
+    color: var(--black);
+    background: var(--black);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page-frame {
+    max-width: 1440px;
+    margin: 0 auto;
+    background: var(--white);
+    position: relative;
+  }
+
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ============================ NAV ============================ */
+  nav.top {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    z-index: 100;
+    transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+  }
+  nav.top.scrolled {
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: saturate(160%) blur(20px);
+    -webkit-backdrop-filter: saturate(160%) blur(20px);
+    border-bottom-color: var(--gray-50);
+  }
+  nav.top .container {
+    max-width: none;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    transition: color 0.3s ease;
+  }
+  nav.top.scrolled .logo { color: var(--black); }
+  .logo-img {
+    height: 34px;
+    width: auto;
+    display: block;
+  }
+  .nav-cta {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--white);
+    text-decoration: none;
+    padding: 10px 18px;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 4px;
+    transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+  .nav-cta:hover { background: var(--white); color: var(--black); border-color: var(--white); }
+  nav.top.scrolled .nav-cta {
+    color: var(--black);
+    border-color: var(--black);
+  }
+  nav.top.scrolled .nav-cta:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+  /* ============================ HERO ============================ */
+  section.hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 180px 0 160px;
+    position: relative;
+    overflow: hidden;
+    margin-top: -72px; /* tuck under the sticky nav so the background bleeds behind it */
+  }
+  .hero .container {
+    max-width: none;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 56px;
+    position: relative;
+    z-index: 2;
+  }
+  .overline {
+    font-family: var(--display);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .overline::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: var(--gray-300);
+    display: inline-block;
+  }
+  h1.hero-headline {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    max-width: 920px;
+    color: var(--white);
+  }
+  h1.hero-headline .accent {
+    color: var(--gray-300);
+    font-weight: 400;
+    font-style: italic;
+  }
+  .hero-sub {
+    font-family: var(--body);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--gray-200);
+    max-width: 620px;
+    font-weight: 400;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 80px;
+    background: linear-gradient(254.25deg, var(--grad-a) 0%, var(--grad-b) 100%);
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px -8px rgba(135, 41, 250, 0.4);
+    border-radius: 4px;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 30px -8px rgba(135, 41, 250, 0.5); }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 15px;
+    border: 1px solid rgba(255,255,255,0.25);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.5); }
+
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    max-width: 800px;
+  }
+  .hero-meta .item .label {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 8px;
+  }
+  .hero-meta .item .value {
+    font-family: var(--display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.4;
+  }
+
+  /* decorative number in hero */
+  .hero-number {
+    position: absolute;
+    right: 32px;
+    top: 100px;
+    font-family: var(--display);
+    font-size: 200px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ============================ SECTION SHARED ============================ */
+  section { padding: 120px 0; }
+  .section-label {
+    font-family: var(--display);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::before {
+    content: "";
+    width: 32px;
+    height: 1px;
+    background: currentColor;
+    display: inline-block;
+  }
+  h2 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(34px, 4.4vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 920px;
+  }
+  h2 .muted { color: var(--gray-300); font-weight: 400; }
+  .section-body {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--gray-700);
+    max-width: 620px;
+    margin-top: 28px;
+  }
+
+  /* ============================ INSIGHT ============================ */
+  section.insight { padding: 160px 0; }
+  .insight .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .insight-lead p {
+    font-family: var(--display);
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    color: var(--black);
+  }
+  .insight-lead p + p { margin-top: 28px; color: var(--gray-300); }
+  .insight-body p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--gray-700);
+  }
+  .insight-body p + p { margin-top: 20px; }
+
+  /* ============================ PRODUCT / DEMO ============================ */
+  section.product {
+    background: var(--gray-10);
+    border-top: 1px solid var(--gray-50);
+    border-bottom: 1px solid var(--gray-50);
+  }
+  .product .container {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .product-copy h2 { margin-bottom: 0; }
+  .product-features {
+    margin-top: 40px;
+    display: grid;
+    gap: 20px;
+  }
+  .product-feature {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-100);
+  }
+  .product-feature .icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .product-feature .text strong {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .product-feature .text p {
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.55;
+  }
+
+  /* ---------- Calculator widget (demo) ---------- */
+  .widget-frame {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,0.18), 0 8px 24px -12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    position: relative;
+  }
+  .widget-frame::before {
+    content: "DEALER DOMAIN";
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    font-family: var(--display);
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    color: var(--gray-300);
+    font-weight: 500;
+  }
+  .widget-browser-bar {
+    background: var(--gray-25);
+    border-bottom: 1px solid var(--gray-50);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  .browser-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--gray-100);
+  }
+  .widget-content {
+    padding: 36px;
+  }
+  .widget-eyebrow {
+    font-family: var(--display);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .widget-title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin-bottom: 6px;
+  }
+  .widget-subtitle {
+    font-size: 13px;
+    color: var(--gray-300);
+    margin-bottom: 28px;
+  }
+  .widget-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .widget-field label {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .widget-field input,
+  .widget-field select {
+    width: 100%;
+    border: 1px solid var(--gray-100);
+    background: var(--white);
+    padding: 12px 14px;
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .widget-field input:focus,
+  .widget-field select:focus { border-color: var(--black); }
+
+  .pct-buttons {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+  }
+  .pct-btn {
+    background: var(--white);
+    border: 1px solid var(--gray-100);
+    padding: 10px 4px;
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .pct-btn:hover { border-color: var(--gray-300); }
+  .pct-btn.active {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+  .down-amount {
+    margin-top: 8px;
+    font-family: var(--display);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+  }
+
+  .widget-payment {
+    margin: 28px 0 24px;
+    padding: 24px;
+    background: var(--black);
+    color: var(--white);
+    position: relative;
+  }
+  .widget-payment .label {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .widget-payment .value {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .widget-payment .value .unit {
+    font-size: 14px;
+    color: var(--gray-300);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+  .widget-payment .note {
+    font-size: 12px;
+    color: var(--gray-300);
+    margin-top: 10px;
+  }
+
+  .widget-cta {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(254.25deg, var(--grad-a) 0%, var(--grad-b) 100%);
+    color: var(--white);
+    border: none;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .widget-cta:hover { transform: translateY(-1px); }
+
+  .widget-footer {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-50);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--gray-300);
+    font-family: var(--display);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* ============================ HOW IT WORKS ============================ */
+  section.how {
+    background: var(--black);
+    color: var(--white);
+    padding: 140px 0;
+  }
+  .how h2 { color: var(--white); }
+  .how-steps {
+    margin-top: 80px;
+    display: grid;
+    gap: 0;
+  }
+  .step {
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    gap: 48px;
+    padding: 56px 0;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    align-items: start;
+  }
+  .step:last-child { border-bottom: 1px solid rgba(255,255,255,0.12); }
+  .step-number {
+    font-family: var(--display);
+    font-size: 88px;
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--white);
+  }
+  .step-title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    color: var(--white);
+  }
+  .step-body {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--gray-200);
+  }
+
+  /* ============================ BENEFITS ============================ */
+  section.benefits { padding: 140px 0; }
+  .benefits-grid {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--gray-100);
+    border-left: 1px solid var(--gray-100);
+  }
+  .benefit {
+    padding: 48px 40px;
+    border-right: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .benefit-num {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    color: var(--gray-300);
+    font-weight: 500;
+    margin-bottom: 28px;
+  }
+  .benefit h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+  }
+  .benefit p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--gray-700);
+  }
+
+  /* ============================ COMPLIANCE ============================ */
+  section.compliance {
+    padding: 80px 0;
+    background: var(--gray-10);
+    border-top: 1px solid var(--gray-50);
+    border-bottom: 1px solid var(--gray-50);
+  }
+  .compliance .container {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .compliance .label {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    font-weight: 500;
+  }
+  .compliance p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--gray-700);
+    max-width: 720px;
+  }
+  .compliance p + p { margin-top: 14px; }
+
+  /* ============================ FINAL CTA ============================ */
+  section.final-cta {
+    background: var(--black);
+    color: var(--white);
+    padding: 160px 0;
+    text-align: left;
+  }
+  .final-cta h2 { color: var(--white); max-width: 900px; }
+  .final-cta .section-body { color: var(--gray-200); max-width: 620px; margin-bottom: 40px; }
+  .final-cta .contacts {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 56px;
+  }
+  .final-cta .contacts .label {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gray-300);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .final-cta .contacts a {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--white);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .final-cta .contacts a:hover { border-color: var(--white); }
+
+  /* ============================ FOOTER ============================ */
+  footer {
+    background: var(--black);
+    color: var(--gray-300);
+    padding: 40px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer .copy {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  footer .links {
+    display: flex;
+    gap: 28px;
+  }
+  footer .links a {
+    font-size: 12px;
+    color: var(--gray-300);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  footer .links a:hover { color: var(--white); }
+
+  /* ============================ RESPONSIVE ============================ */
+  @media (max-width: 900px) {
+    section { padding: 80px 0; }
+    section.hero { padding: 144px 0 120px; }
+    .hero-number { font-size: 120px; top: 60px; }
+    .insight .container,
+    .product .container,
+    .compliance .container { grid-template-columns: 1fr; gap: 48px; }
+    .step { grid-template-columns: 1fr; gap: 16px; padding: 40px 0; }
+    .step-number { font-size: 64px; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .hero-meta { grid-template-columns: 1fr; gap: 24px; }
+    .final-cta .contacts { grid-template-columns: 1fr; gap: 28px; }
+    h1.hero-headline { font-size: 42px; }
+    h2 { font-size: 34px; }
+    .container { padding: 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="container">
+    <a href="#" class="logo" aria-label="YachtWay">
+      <svg class="logo-img" viewBox="0 19 608 110" fill="currentColor" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="YachtWay">
+        <path d="M24.6694 102.604V78.2525L0.915516 42.7926H8.60561L28.1726 72.4422L47.6542 42.7926H55.088L31.2487 78.5089V102.604H24.6694ZM50.0187 102.604L74.7979 42.7926H82.7443L107.353 102.604H100.175L92.656 83.8065H64.459L56.8543 102.604H50.0187ZM66.766 78.1671H90.3489L78.5575 48.8593L66.766 78.1671ZM144.569 103.544C140.24 103.544 136.195 102.775 132.436 101.237C128.676 99.6424 125.372 97.4493 122.524 94.6581C119.676 91.8099 117.454 88.5345 115.859 84.8318C114.321 81.0722 113.552 77.0278 113.552 72.6986C113.552 68.3693 114.321 64.3534 115.859 60.6507C117.454 56.8911 119.676 53.6157 122.524 50.8245C125.372 47.9763 128.676 45.7832 132.436 44.2452C136.195 42.6502 140.24 41.8527 144.569 41.8527C147.702 41.8527 150.692 42.2515 153.541 43.049C156.446 43.7895 159.123 44.9003 161.572 46.3813C164.079 47.8054 166.3 49.5713 168.237 51.679L163.879 56.293C161.544 53.6157 158.667 51.565 155.249 50.1409C151.832 48.6599 148.271 47.9194 144.569 47.9194C141.094 47.9194 137.876 48.546 134.913 49.7992C131.951 51.0524 129.359 52.8182 127.138 55.0968C124.973 57.3184 123.264 59.9387 122.011 62.9578C120.815 65.9199 120.217 69.1668 120.217 72.6986C120.217 76.1733 120.815 79.4203 122.011 82.4393C123.264 85.4584 125.002 88.1072 127.223 90.3858C129.445 92.6074 132.037 94.3448 134.999 95.598C138.018 96.8512 141.265 97.4778 144.74 97.4778C148.442 97.4778 151.974 96.7657 155.335 95.3416C158.696 93.8606 161.515 91.8384 163.794 89.275L168.066 93.7182C166.073 95.7688 163.823 97.5347 161.316 99.0158C158.867 100.497 156.218 101.636 153.37 102.434C150.522 103.174 147.588 103.544 144.569 103.544ZM183.163 102.604V42.7926H189.742V69.5371H224.518V42.7926H231.098V102.604H224.518V75.4328H189.742V102.604H183.163ZM265.861 102.604V48.6884H244.243V42.7926H294.058V48.6884H272.44V102.604H265.861Z"/>
+        <path d="M330.935 102.604L315.042 42.7926H318.973L332.986 96.1106L348.708 42.7926H352.638L368.104 96.367L382.203 42.7926H385.962L369.984 102.604H366.224L350.588 48.5175L334.695 102.604H330.935ZM389.806 102.604L414.756 42.7926H419.626L444.491 102.604H440.219L431.931 82.3539H402.281L393.907 102.604H389.806ZM403.733 78.8506H430.478L417.148 46.4668L403.733 78.8506ZM464.403 102.604V77.6544L440.991 42.7926H445.691L466.454 74.0657L487.303 42.7926H491.831L468.334 77.8253V102.604H464.403Z"/>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M307.564 124.364L512.05 124.364H604.376C607.746 124.364 607.746 124.354 607.746 121.102V26.5807C607.746 26.1671 607.751 25.8048 607.756 25.4875C607.772 24.3479 607.78 23.7897 607.505 23.5216C607.241 23.2643 606.717 23.2745 605.688 23.2946C605.359 23.301 604.979 23.3084 604.54 23.3084H462.855L307.564 23.3182V27.4032C366.909 27.471 443.447 27.4687 501.623 27.3963C504.255 27.3861 504.89 28.1099 504.89 30.6585C504.829 59.3758 504.829 88.0829 504.829 116.79V118.064C504.9 119.471 504.286 120.052 502.852 119.991C501.602 119.95 500.353 119.964 499.103 119.977C498.478 119.984 497.854 119.991 497.229 119.991C440.522 119.952 365.496 119.95 307.564 119.987V124.364ZM575.848 82.1859C578.532 78.2509 579.781 73.7757 579.781 67.0372C579.894 55.3342 568.269 43.6311 553.724 44.2224C538.135 44.8545 526.397 60.1969 530.628 75.1111C535.329 91.8094 553.694 98.8842 568.525 89.638C570.072 88.6797 570.881 89.0365 571.977 90.1477C573.754 91.9496 575.556 93.7276 577.359 95.5055L577.36 95.5069L577.362 95.509L577.363 95.5101C579.975 98.0861 582.586 100.662 585.118 103.309C586.716 104.96 587.699 104.267 588.764 103.054C588.957 102.834 589.172 102.629 589.383 102.427C590.339 101.514 591.206 100.686 589.461 99.0575C586.995 96.75 584.611 94.3585 582.227 91.9673L582.226 91.9667C580.292 90.0268 578.358 88.0871 576.381 86.1923C575.008 84.867 574.65 83.9496 575.848 82.1859ZM539.098 58.4255C537.012 61.5257 535.897 65.1715 535.893 68.9023C535.88 71.3859 536.361 73.8475 537.309 76.1448C538.258 78.442 539.654 80.5294 541.418 82.286C543.182 84.0427 545.279 85.4338 547.586 86.379C549.894 87.3241 552.367 87.8045 554.862 87.7923C558.611 87.7903 562.275 86.6824 565.391 84.6087C568.507 82.5349 570.935 79.5884 572.369 76.1414C573.803 72.6944 574.178 68.9018 573.447 65.2426C572.716 61.5835 570.912 58.2222 568.262 55.5834C565.612 52.9447 562.236 51.1469 558.56 50.4174C554.884 49.6878 551.073 50.0592 547.609 51.4845C544.145 52.9099 541.183 55.3253 539.098 58.4255Z"/>
+      </svg>
+    </a>
+    <a href="https://yachtway.solutions/easyfund-demo" target="_blank" rel="noopener noreferrer" class="nav-cta">Request a demo</a>
+  </div>
+</nav>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="hero-number">01</div>
+  <div class="container">
+    <div class="overline">For dealers and brokers</div>
+    <h1 class="hero-headline">
+      Your buyers ask what the monthly payment is. <span class="accent">You should already have the answer.</span>
+    </h1>
+    <p class="hero-sub">
+      Embed the EasyFund calculator on your website in under ten minutes. Buyers model real payment scenarios on your domain. Every pre-qualification routes back to you as a lead. Every closed loan pays you a referral fee.
+    </p>
+    <div class="hero-ctas">
+      <a href="https://yachtway.solutions/easyfund-demo" target="_blank" rel="noopener noreferrer" class="btn-primary">
+        Request a demo
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="square"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-meta">
+      <div class="item">
+        <div class="label">Install</div>
+        <div class="value">One iframe</div>
+      </div>
+      <div class="item">
+        <div class="label">Lead attribution</div>
+        <div class="value">Every lead, yours</div>
+      </div>
+      <div class="item">
+        <div class="label">Referral revenue</div>
+        <div class="value">On every closed loan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="page-frame">
+
+<!-- ============================ INSIGHT ============================ -->
+<section class="insight">
+  <div class="container">
+    <div class="insight-lead">
+      <div class="section-label" style="color: var(--gray-300); margin-bottom: 40px;">The problem</div>
+      <p>The financing question kills more deals than the price does.</p>
+      <p>The fix is not better salespeople. The fix is putting the answer where the question lives.</p>
+    </div>
+    <div class="insight-body">
+      <p>A buyer falls in love with a 62-foot listing on your site. They ask what the monthly payment looks like. Your team estimates. The buyer leaves to do the math elsewhere. By the time they figure it out, they have looked at three other boats.</p>
+      <p>Most brokerages send buyers to a generic calculator or a lender pitch. Both options break the conversation. Both options route the lead away from you.</p>
+      <p>The EasyFund calculator answers the payment question on your site. Buyers stay engaged. When they continue to pre-qualification on YachtWay, the lead is attributed to you automatically. When the loan closes, you earn a referral fee.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PRODUCT / DEMO ============================ -->
+<section class="product">
+  <div class="container">
+    <div class="product-copy">
+      <div class="section-label">The product</div>
+      <h2>One iframe on your site. Every lead, attributed to you. A referral fee on every closed loan.</h2>
+      <div class="product-features">
+        <div class="product-feature">
+          <div class="icon">→</div>
+          <div class="text">
+            <strong>Embedded as a single iframe</strong>
+            <p>Paste one tag on any listing page, vessel page, or your homepage. No engineering work. Live in under ten minutes.</p>
+          </div>
+        </div>
+        <div class="product-feature">
+          <div class="icon">→</div>
+          <div class="text">
+            <strong>Buyers play with real numbers</strong>
+            <p>Vessel price, down payment, term, and rate. Real-time monthly payment estimates. Buyers stay on your site while they model what they can afford.</p>
+          </div>
+        </div>
+        <div class="product-feature">
+          <div class="icon">→</div>
+          <div class="text">
+            <strong>Lead attribution is automatic</strong>
+            <p>When the buyer clicks through to pre-qualify or apply, the lead is tagged to your domain. The lender contacts the buyer, and the lead is routed to your team in real time.</p>
+          </div>
+        </div>
+        <div class="product-feature">
+          <div class="icon">→</div>
+          <div class="text">
+            <strong>Referral fee on every closed loan</strong>
+            <p>When a loan funded through your embed closes, you earn a referral fee. Recurring revenue from financing your buyers were going to need anyway.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE DEMO WIDGET -->
+    <div class="widget-frame">
+      <div class="widget-browser-bar">
+        <span class="browser-dot"></span>
+        <span class="browser-dot"></span>
+        <span class="browser-dot"></span>
+      </div>
+      <div class="widget-content">
+        <div class="widget-eyebrow">EasyFund calculator (embedded iframe)</div>
+        <div class="widget-title">Boat Loan Calculator</div>
+        <div class="widget-subtitle">Estimate your monthly payment in real time.</div>
+
+        <div class="widget-field" style="margin-bottom: 16px;">
+          <label for="price">Vessel price</label>
+          <input id="price" type="number" value="450000" min="50000" step="5000" />
+        </div>
+
+        <div class="widget-field" style="margin-bottom: 16px;">
+          <label for="down-pct">Down payment</label>
+          <div class="pct-buttons">
+            <button type="button" class="pct-btn" data-pct="10">10%</button>
+            <button type="button" class="pct-btn" data-pct="20">20%</button>
+            <button type="button" class="pct-btn active" data-pct="30">30%</button>
+            <button type="button" class="pct-btn" data-pct="50">50%</button>
+            <button type="button" class="pct-btn" data-pct="70">70%</button>
+          </div>
+          <div class="down-amount" id="down-display">$135,000</div>
+        </div>
+
+        <div class="widget-row">
+          <div class="widget-field">
+            <label for="term">Loan term</label>
+            <select id="term">
+              <option value="10">120 mo. / 10 yr.</option>
+              <option value="15" selected>180 mo. / 15 yr.</option>
+              <option value="20">240 mo. / 20 yr.</option>
+            </select>
+          </div>
+          <div class="widget-field">
+            <label for="rate">Interest rate (APR)</label>
+            <select id="rate">
+              <option value="6.5">6.50%</option>
+              <option value="7.5">7.50%</option>
+              <option value="8.25" selected>8.25%</option>
+              <option value="9.5">9.50%</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="widget-payment">
+          <div class="label">Monthly payment</div>
+          <div class="value" id="payment">$3,494<span class="unit">/mo</span></div>
+          <div class="note">Most lenders require at least 20% down. Estimate only. Not a loan offer.</div>
+        </div>
+
+        <button class="widget-cta">Apply Now</button>
+
+        <div class="widget-footer">
+          <span>POWERED BY EASYFUND</span>
+          <span>YachtWay.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ HOW IT WORKS ============================ -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-label" style="color: var(--gray-300);">How it works</div>
+    <h2>Three steps. One week to live.</h2>
+
+    <div class="how-steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <div class="step-title">Embed</div>
+        <div class="step-body">
+          Paste a single iframe tag on any page of your site. The EasyFund calculator loads inline. No engineering review, no build pipeline, no setup fee. The YachtWay team will walk you through placement if you want a second set of eyes.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <div class="step-title">Buyers model their payment</div>
+        <div class="step-body">
+          Buyers enter the vessel price, down payment, term, and rate. They see a live monthly payment estimate on your site, not someone else's. When they are ready to move forward, they click Apply Now and continue to the EasyFund pre-qualification on YachtWay. The attribution to your domain travels with them.
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <div class="step-title">Lead and referral revenue come back to you</div>
+        <div class="step-body">
+          A matching lender contacts the buyer. The pre-qualified lead is routed to your inbox in real time, with the vessel of interest, credit profile, and budget attached. When the loan closes, you earn a referral fee.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BENEFITS ============================ -->
+<section class="benefits">
+  <div class="container">
+    <div class="section-label">What you get</div>
+    <h2>Live payment answers. Every lead, yours. <span class="muted">A referral fee on every closed loan.</span></h2>
+
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="benefit-num">01</div>
+        <h3>Buyers stay on your site</h3>
+        <p>The financing question is the most common reason a buyer abandons a listing to do research elsewhere. The calculator answers it on your domain. The conversation continues.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">02</div>
+        <h3>Every lead is attributed to you</h3>
+        <p>When a buyer continues from your embed to pre-qualification or full application on YachtWay, the lead is tagged to your domain. Routed to your inbox in real time. No manual tracking required.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">03</div>
+        <h3>Referral fees on closed loans</h3>
+        <p>You earn a referral fee on every loan that funds through your embed. Recurring revenue from buyers who were going to need financing regardless.</p>
+      </div>
+      <div class="benefit">
+        <div class="benefit-num">04</div>
+        <h3>No setup cost. No engineering</h3>
+        <p>The calculator is included in your EasyFund partnership. One iframe, live in under ten minutes, no installation fees, no per-lead charges.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ COMPLIANCE ============================ -->
+<section class="compliance">
+  <div class="container">
+    <div class="label">About EasyFund</div>
+    <div>
+      <p>EasyFund connects buyers with matching lenders through a proprietary application process based on their credit profile. YachtWay is a technology platform. YachtWay is not a lender and does not offer financial advice.</p>
+      <p>Every loan is underwritten by a partner lender in the EasyFund network. Final approval, rates, and terms are determined by the lender.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FINAL CTA ============================ -->
+<section class="final-cta" id="request">
+  <div class="container">
+    <div class="section-label" style="color: var(--gray-300);">Get started</div>
+    <h2>See the calculator live. Book a demo.</h2>
+    <p class="section-body">A fifteen-minute walkthrough with the YachtWay Fintech team. See the calculator running on a sample site, review how lead attribution works, and walk through referral terms for your brokerage. Most partners are live within a week of the call.</p>
+    <a href="https://yachtway.solutions/easyfund-demo" target="_blank" rel="noopener noreferrer" class="btn-primary">
+      Request a demo
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 5H13M13 5L9 1M13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="square"/></svg>
+    </a>
+
+    <div class="contacts">
+      <div>
+        <div class="label">Fintech</div>
+        <a href="mailto:Partners@YachtWay.com">Finance@YachtWay.com</a>
+      </div>
+      <div>
+        <div class="label">Direct</div>
+        <a href="tel:+13055550100">+1 305 337 8491</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="container">
+    <div class="copy">© 2026 YachtWay. All rights reserved.</div>
+    <div class="links">
+      <a href="https://YachtWay.com">YachtWay.com</a>
+      <a href="https://YachtWay.com/easyfund">EasyFund</a>
+      <a href="https://YachtWay.com/privacy">Privacy</a>
+      <a href="https://YachtWay.com/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /.page-frame -->
+
+<script>
+  // Nav scroll state — transparent at top, blurred when scrolled
+  (function() {
+    const nav = document.querySelector('nav.top');
+    if (!nav) return;
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Live payment calculation
+  const priceEl = document.getElementById('price');
+  const termEl = document.getElementById('term');
+  const rateEl = document.getElementById('rate');
+  const paymentEl = document.getElementById('payment');
+  const downDisplay = document.getElementById('down-display');
+  const pctBtns = document.querySelectorAll('.pct-btn');
+
+  let downPct = 30;
+
+  function formatCurrency(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function calc() {
+    const price = parseFloat(priceEl.value) || 0;
+    const down = price * (downPct / 100);
+    const termYears = parseInt(termEl.value, 10);
+    const annualRate = parseFloat(rateEl.value) / 100;
+
+    downDisplay.textContent = formatCurrency(down) + ' down';
+
+    const principal = Math.max(price - down, 0);
+    const monthlyRate = annualRate / 12;
+    const n = termYears * 12;
+
+    let payment;
+    if (monthlyRate === 0) {
+      payment = principal / n;
+    } else {
+      payment = principal * (monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
+    }
+
+    if (!isFinite(payment) || isNaN(payment) || payment < 0) payment = 0;
+
+    paymentEl.innerHTML = formatCurrency(payment) + '<span class="unit">/mo</span>';
+  }
+
+  pctBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pctBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      downPct = parseInt(btn.dataset.pct, 10);
+      calc();
+    });
+  });
+
+  [priceEl, termEl, rateEl].forEach(el => {
+    el.addEventListener('input', calc);
+    el.addEventListener('change', calc);
+  });
+
+  calc();
+</script>
+
+</body>
+</html>
