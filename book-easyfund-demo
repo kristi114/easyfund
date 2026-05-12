@@ -120,8 +120,6 @@
     margin-top: -72px; /* tuck under the sticky nav so the background bleeds behind it */
   }
   .hero .container {
-    max-width: none;
-    padding: 0 32px;
     display: grid;
     gap: 40px;
     position: relative;
